@@ -1,0 +1,17 @@
+{
+  "name": "charger88/orange.image",
+  "description": "This library implements object-oriented interface for working with images.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Mikhail Kelner",
+      "email": "mikhail.kelner@gmail.com"
+    }
+  ]
+}
