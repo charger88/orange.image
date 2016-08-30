@@ -358,6 +358,45 @@ class Image {
 	}
 
     /**
+     * @param Image $image
+     * @param int $x
+     * @param int $y
+     * @return Image
+     * @throws \Exception
+     */
+    public function putImage($image, $x, $y){
+        if (!($image instanceof Image)){
+            throw new \Exception('Unknown type of image');
+        }
+        imagecopy($this->source,$image->getResource(),$x,$y,0,0,$image->getWidth(),$image->getHeight());
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     * @param Font $font
+     * @param int $x
+     * @param int $y
+     * @param int $angle
+     * @return Image
+     * @throws \Exception
+     */
+    public function putText($text, $font, $x, $y, $angle = 0){
+        imagealphablending($this->source, true);
+        imagettftext(
+            $this->source,
+            $font->getSize(),
+            $angle,
+            $x,
+            $y,
+            $font->getColor()->getColorResource($this->source),
+            $font->getFontfile(),
+            $text
+        );
+        return $this;
+    }
+
+    /**
      * @return resource
      */
     public function getResource(){
@@ -442,5 +481,5 @@ class Image {
             : new Color()
         ;
     }
-	
+
 }
