@@ -77,10 +77,10 @@ class Image {
 	}
 
     /**
-     * @param int $jpeg_quality
+     * @param int $quality
      * @return Image
      */
-    public function echoImage($jpeg_quality = null){
+    public function echoImage($quality = null){
         $type = $this->getType(false);
         if (is_null($type)){
             $type = 'image/png';
@@ -89,9 +89,11 @@ class Image {
         if ($type == 'image/png') {
             imagepng($this->source);
         } elseif ($type == 'image/jpeg') {
-            imagejpeg($this->source,null,is_null($jpeg_quality) ? 100 : intval($jpeg_quality));
+            imagejpeg($this->source,null,is_null($quality) ? 100 : intval($quality));
         } elseif ($type == 'image/gif') {
             imagegif($this->source);
+        } elseif ($type == 'image/webp') {
+            imagewebp($this->source, null,is_null($quality) ? 100 : intval($quality));
         } else {
             imagepng($this->source);
         }
@@ -122,8 +124,10 @@ class Image {
 		} elseif ($this->type == 'image/jpeg') {
 			return $ext ? 'jpg' : $this->type;
 		} elseif ($this->type == 'image/gif') {
-			return $ext ? 'gif' : $this->type;
-		} else {
+            return $ext ? 'gif' : $this->type;
+        }  elseif ($this->type == 'image/webp') {
+            return $ext ? 'webp' : $this->type;
+        } else {
 			return null;
 		}
 	}
@@ -151,11 +155,11 @@ class Image {
     /**
      * @param string $path
      * @param strimg $type
-     * @param int $jpeg_quality
+     * @param int $quality
      * @param bool $set_new_path
      * @return Image
      */
-    public function save($path = null,$type = null,$jpeg_quality = 100,$set_new_path = false){
+    public function save($path = null,$type = null,$quality = 100,$set_new_path = false){
 		if ($this->source){
 			if (is_null($type)){
 				$type = $this->type;
@@ -170,10 +174,12 @@ class Image {
 			if ($type == 'image/png') {
 				return imagepng($this->source,$path);
 			} elseif ($type == 'image/jpeg') {
-				return imagejpeg($this->source,$path,intval($jpeg_quality));
+				return imagejpeg($this->source,$path,intval($quality));
 			} elseif ($type == 'image/gif') {
-				return imagegif($this->source,$path);
-			} else {
+                return imagegif($this->source,$path);
+            } elseif ($type == 'image/webp') {
+                return imagewebp($this->source,$path,intval($quality));
+            } else {
 				return imagepng($this->source,$path);
 			}
 		} else {

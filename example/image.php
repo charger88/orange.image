@@ -41,6 +41,12 @@ if ($action == 'enlarge'){
     $image->echoImage(51);
 }  else if ($action == 'extreme-compress'){
     $image->echoImage(1);
+} else if ($action == 'webp'){
+    $image->setType('image/webp');
+    $image->echoImage();
+} else if ($action == 'webp-compressed'){
+    $image->setType('image/webp');
+    $image->echoImage(1);
 } else {
     $image->echoImage();
 }

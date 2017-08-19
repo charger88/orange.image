@@ -15,6 +15,8 @@
         <li><a href="?action=compress">Compress</a></li>
         <li><a href="?action=filter-greyscale">Greyscale (filter)</a></li>
         <li><a href="?action=extreme-compress">Extreme compress</a></li>
+        <li><a href="?action=webp">WebP</a></li>
+        <li><a href="?action=webp-compressed">Compressed WebP</a></li>
     </ul>
 </body>
 </html>
